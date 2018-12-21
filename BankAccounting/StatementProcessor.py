@@ -1,4 +1,5 @@
-from Transaction import Transaction
+from processor_types.mastercard import extract_transaction_lines_mastercard, build_transactions_mastercard
+from processor_types.savings import extract_transaction_lines_savings, build_transactions_savings
 
 
 class StatementProcessor(object):
@@ -16,37 +17,18 @@ class StatementProcessor(object):
     @staticmethod
     def extract_transactions_mastercard(data):
         data_array = data.splitlines()
-        is_transactions = False
-        transactions = []
-        for line in data_array:
-            if line == 'Time to Pay':
-                break
-            if is_transactions and line != '':
-                try:
-                    int(line)
-                except Exception:
-                    transactions.append(line)
-            if line == 'DATE DATE':
-                is_transactions = True
-            if 'STATEMENT FROM' in line:
-                year = line[-4:]
-        new_balance = transactions.pop()
+        transactions, year = extract_transaction_lines_mastercard(data_array)
 
-        final_transactions = []
+        final_transactions = build_transactions_mastercard(transactions, year)
 
-        i = 0
-        while i < len(transactions):
-            line = transactions[i].split(' ')
-            t_date = ' '.join(line[:2])
-            t_date = ' '.join([t_date, year])
-            description = ' '.join(line[4:])
-            amount = transactions[i+1]
-            amount = amount.replace('$', '')
-            transaction = Transaction(t_date, description, amount, 'Mastercard')
-            i = i+2
-            final_transactions.append(transaction)
-
-        return new_balance, final_transactions
+        return final_transactions
 
     def extract_transactions_savings(self, data):
-        pass
+        data_array = data.splitlines()
+        transactions, year = extract_transaction_lines_savings(data_array)
+
+        final_transactions = build_transactions_savings(transactions, year)
+
+        return final_transactions
+
+

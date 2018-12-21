@@ -1,0 +1,9 @@
+{
+  "Main Categories":["Necessity", "Luxury", "Savings"],
+  "Sub Categories":{
+    "Food":{
+      "Parent Category": "Necessity",
+      "Elements": []
+    }
+  }
+}

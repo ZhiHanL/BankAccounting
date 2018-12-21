@@ -1,4 +1,3 @@
-import sys
 import argparse
 from tika import parser
 
@@ -20,10 +19,10 @@ def main():
         raw_data = raw_data['content']
         statement_type = sp.determine_statement_type(raw_data)
         if statement_type == 'savings':
-            new_balance, transactions = sp.extract_transactions_savings(raw_data)
+            transactions = sp.extract_transactions_savings(raw_data)
             all_transactions.append(transactions)
         elif statement_type == 'mastercard':
-            new_balance, transactions = sp.extract_transactions_mastercard(raw_data)
+            transactions = sp.extract_transactions_mastercard(raw_data)
             all_transactions.append(transactions)
 
     ew = ExcelWriter(transactions, args.workbook)
