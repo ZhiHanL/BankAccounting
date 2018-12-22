@@ -24,15 +24,15 @@ def main():
         statement_type = sp.determine_statement_type(raw_data)
         if statement_type == 'savings':
             transactions = sp.extract_transactions_savings(raw_data)
-            all_transactions.append(transactions)
+            all_transactions.extend(transactions)
         elif statement_type == 'mastercard':
             transactions = sp.extract_transactions_mastercard(raw_data)
-            all_transactions.append(transactions)
+            all_transactions.extend(transactions)
         elif statement_type == 'checking':
             transactions = sp.extract_transactions_checking(raw_data)
-            all_transactions.append(transactions)
+            all_transactions.extend(transactions)
 
-    ew = ExcelWriter(transactions, args.workbook)
+    ew = ExcelWriter(all_transactions, args.workbook)
     ew.write_to_file()
     print('done :)')
 
