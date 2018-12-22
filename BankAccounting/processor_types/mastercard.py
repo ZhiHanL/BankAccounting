@@ -32,6 +32,8 @@ def build_transactions_mastercard(transactions, year):
         amount = transactions[i + 1]
         amount = amount.replace('$', '')
 
+        amount = invert_negatives(amount)
+
         key = get_category_key(description)
         sub, main = set_category(key)
 
@@ -39,3 +41,12 @@ def build_transactions_mastercard(transactions, year):
         i = i + 2
         final_transactions.append(transaction)
     return final_transactions
+
+
+def invert_negatives(amount):
+    if "-" in amount:
+        amount = amount.replace("-", "")
+    else:
+        amount = "-" + amount
+
+    return amount

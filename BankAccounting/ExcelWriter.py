@@ -8,7 +8,7 @@ class ExcelWriter(object):
         self.path = workbook
         self.transactions = transactions
         self.workbook = load_workbook(workbook)
-        self.ws = self.workbook['Transactions']
+        self.ws = self.workbook['Data']
 
     def write_to_file(self):
         current_row = self._find_max_row()
