@@ -1,7 +1,7 @@
 from Transaction import Transaction
-from processor_types.common import set_category, get_category_key
+from processor_types.common import get_category_key, set_category
 
-def extract_transaction_lines_savings(data_array):
+def extract_transaction_lines_checking(data_array):
     is_transactions = False
     transactions = []
     for line in data_array:
@@ -21,8 +21,10 @@ def extract_transaction_lines_savings(data_array):
     return transactions, year
 
 
-def build_transactions_savings(transactions, year):
+def build_transactions_checking(transactions, year):
     final_transactions = []
+    if "Opening Balance" in transactions[0]:
+        transactions = transactions[1:]
     i = 0
     while i < len(transactions):
         line = transactions[i].split(' ')
@@ -46,14 +48,12 @@ def build_transactions_savings(transactions, year):
 
         key = get_category_key(description)
         sub, main = set_category(key)
-        transaction = Transaction(t_date, description, amount, 'Savings', sub, main)
+
+        transaction = Transaction(t_date, description, amount, 'Checking', sub, main)
         i = i + 1
         final_transactions.append(transaction)
     return final_transactions
 
 
 def _make_withdrawal_negative(description, amount):
-    if "transfer" in description or "Transfer" in description:
-        return "-".join(["", amount])
-    else:
-        return amount
+    return amount

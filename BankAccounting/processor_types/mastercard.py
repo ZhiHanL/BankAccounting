@@ -1,4 +1,5 @@
 from Transaction import Transaction
+from processor_types.common import get_category_key, set_category
 
 
 def extract_transaction_lines_mastercard(data_array):
@@ -30,7 +31,11 @@ def build_transactions_mastercard(transactions, year):
         description = ' '.join(line[4:])
         amount = transactions[i + 1]
         amount = amount.replace('$', '')
-        transaction = Transaction(t_date, description, amount, 'Mastercard')
+
+        key = get_category_key(description)
+        sub, main = set_category(key)
+
+        transaction = Transaction(t_date, description, amount, 'Mastercard', sub, main)
         i = i + 2
         final_transactions.append(transaction)
     return final_transactions

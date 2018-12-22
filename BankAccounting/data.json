@@ -1,9 +1,1 @@
-{
-  "Main Categories":["Necessity", "Luxury", "Savings"],
-  "Sub Categories":{
-    "Food":{
-      "Parent Category": "Necessity",
-      "Elements": []
-    }
-  }
-}
+{"MainCategories": ["Necessity", "Luxury", "Savings", "Transfer", "Income"], "SubCategories": {"Food": "Necessity", "Transfer": "Transfer", "Interest": "Income", "Sports": "Luxury", "Games": "Luxury", "Luxury": "Luxury", "Health": "Necessity"}, "Index": {"Test": "Food", "PayrollDepositDEMONWARE": "Transfer", "OnlineBankingtransfer-": "Transfer", "OnlineTransfertoDeposit": "Transfer", "Depositinterest": "Interest", " SPORT CHEK RICHMOND BC": "Sports", " SQ *SQ *KISMET COOKERY VANCOUVER BC": "Food", " PAYMENT - THANK YOU / PAIEMENT - MERCI": "Transfer", " STEAMGAMES.COM GBR": "Games", " AMZN MKTP WWW.AMAZON.CAON": "Luxury", " TIM HORTONS QPS VANCOUVER BC": "Food", " BLUNDELL DENTAL CLINIC RICHMOND BC": "Health", " Online Banking transfer -": "Transfer"}}

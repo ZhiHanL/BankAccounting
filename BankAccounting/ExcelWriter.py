@@ -19,6 +19,8 @@ class ExcelWriter(object):
             self.ws['C'+str(current_row)] = float(transaction.amount)
             self.ws['C'+str(current_row)].number_format = u'"$"#,##0.00'
             self.ws['D'+str(current_row)] = transaction.account
+            self.ws['I' + str(current_row)] = transaction.sub_category
+            self.ws['J' + str(current_row)] = transaction.main_category
             current_row = current_row + 1
         self.workbook.save(self.path)
 
@@ -29,4 +31,5 @@ class ExcelWriter(object):
         for max_row, row in enumerate(self.ws, 1):
             if all(c.value is None for c in row):
                 return max_row
+        return max_row
 
